@@ -6,7 +6,6 @@ import click
 import json
 import os
 from pathlib import Path
-import jsonpatch
 from pyhf.utils import VolumeMountPath
 
 log = logging.getLogger(__name__)
@@ -80,6 +79,8 @@ def xml2json(
 @click.option('-p', '--patch', multiple=True)
 def json2xml(workspace, output_dir, specroot, dataroot, resultprefix, patch):
     """Convert pyhf JSON back to XML + ROOT files."""
+    import jsonpatch
+
     try:
         import uproot
 

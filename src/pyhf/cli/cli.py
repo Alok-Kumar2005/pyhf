@@ -1,13 +1,12 @@
 """The pyhf Command Line Interface."""
 
 import logging
+from importlib.metadata import version as _importlib_version
 
 import click
 
-from pyhf import __version__
 from pyhf.cli import rootio, spec, infer, patchset, complete
 from pyhf.contrib import cli as contrib
-from pyhf import utils
 
 logging.basicConfig()
 log = logging.getLogger(__name__)
@@ -16,12 +15,14 @@ log = logging.getLogger(__name__)
 def _print_citation(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
+    from pyhf import utils
+
     click.echo(utils.citation())
     ctx.exit()
 
 
 @click.group(context_settings=dict(help_option_names=['-h', '--help']))
-@click.version_option(version=__version__)
+@click.version_option(version=_importlib_version("pyhf"))
 @click.option(
     "--cite",
     "--citation",

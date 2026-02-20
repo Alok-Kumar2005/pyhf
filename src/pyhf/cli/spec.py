@@ -256,6 +256,8 @@ def rename(workspace, output_file, channel, sample, modifier, measurement):
 
     See :func:`pyhf.workspace.Workspace.rename` for more information.
     """
+    from pyhf.workspace import Workspace
+
     with click.open_file(workspace, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 
@@ -301,6 +303,8 @@ def combine(workspace_one, workspace_two, join, output_file, merge_channels):
 
     See :func:`pyhf.workspace.Workspace.combine` for more information.
     """
+    from pyhf.workspace import Workspace
+
     with click.open_file(workspace_one, "r", encoding="utf-8") as specstream:
         spec_one = json.load(specstream)
 
@@ -350,6 +354,9 @@ def digest(workspace, algorithm, output_json):
         $ curl -sL https://raw.githubusercontent.com/scikit-hep/pyhf/main/docs/examples/json/2-bin_1-channel.json | pyhf digest
         sha256:dad8822af55205d60152cbe4303929042dbd9d4839012e055e7c6b6459d68d73
     """
+    from pyhf.workspace import Workspace
+    from pyhf import utils
+
     with click.open_file(workspace, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 
@@ -396,6 +403,8 @@ def sort(workspace, output_file):
 
 
     """
+    from pyhf.workspace import Workspace
+
     with click.open_file(workspace, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 

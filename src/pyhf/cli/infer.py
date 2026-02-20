@@ -5,13 +5,18 @@ import logging
 import click
 import json
 
-from pyhf.utils import EqDelimStringParamType
-from pyhf.infer import hypotest
-from pyhf.infer import mle
-from pyhf.workspace import Workspace
-from pyhf import get_backend, set_backend, optimize
-
 log = logging.getLogger(__name__)
+
+
+class _LazyEqDelimStringParamType(click.ParamType):
+    """A :class:`click.ParamType` that defers importing :class:`~pyhf.utils.EqDelimStringParamType`."""
+
+    name = 'equal-delimited option'
+
+    def convert(self, value, param, ctx):
+        from pyhf.utils import EqDelimStringParamType
+
+        return EqDelimStringParamType().convert(value, param, ctx)
 
 
 @click.group(name='infer')
@@ -46,7 +51,7 @@ def cli():
     help="The optimizer used for the calculation.",
     default="scipy",
 )
-@click.option("--optconf", type=EqDelimStringParamType(), multiple=True)
+@click.option("--optconf", type=_LazyEqDelimStringParamType(), multiple=True)
 def fit(
     workspace,
     output_file,
@@ -80,6 +85,10 @@ def fit(
             "twice_nll": 23.19636590468879
         }
     """
+    from pyhf.infer import mle
+    from pyhf.workspace import Workspace
+    from pyhf import get_backend, set_backend, optimize
+
     # set the backend if not NumPy
     if backend in ["jax"]:
         set_backend("jax")
@@ -156,7 +165,7 @@ def fit(
     help="The optimizer used for the calculation.",
     default="scipy",
 )
-@click.option('--optconf', type=EqDelimStringParamType(), multiple=True)
+@click.option('--optconf', type=_LazyEqDelimStringParamType(), multiple=True)
 def cls(
     workspace,
     output_file,
@@ -190,6 +199,10 @@ def cls(
             "CLs_obs": 0.3599845631401915
         }
     """
+    from pyhf.infer import hypotest
+    from pyhf.workspace import Workspace
+    from pyhf import get_backend, set_backend, optimize
+
     with click.open_file(workspace, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 

@@ -5,8 +5,6 @@ import logging
 import click
 import json
 
-from pyhf.patchset import PatchSet
-from pyhf.workspace import Workspace
 
 logging.basicConfig()
 log = logging.getLogger(__name__)
@@ -40,6 +38,8 @@ def extract(patchset, name, output_file, with_metadata):
     Returns:
         jsonpatch (:obj:`list`): A list of jsonpatch operations to apply to a workspace.
     """
+    from pyhf.patchset import PatchSet
+
     with click.open_file(patchset, "r", encoding="utf-8") as fstream:
         patchset_spec = json.load(fstream)
 
@@ -80,6 +80,9 @@ def apply(background_only, patchset, name, output_file):
     Returns:
         workspace (:class:`~pyhf.workspace.Workspace`): The patched background-only workspace.
     """
+    from pyhf.patchset import PatchSet
+    from pyhf.workspace import Workspace
+
     with click.open_file(background_only, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 
@@ -112,6 +115,9 @@ def verify(background_only, patchset):
     Returns:
         None
     """
+    from pyhf.patchset import PatchSet
+    from pyhf.workspace import Workspace
+
     with click.open_file(background_only, "r", encoding="utf-8") as specstream:
         spec = json.load(specstream)
 
@@ -135,6 +141,8 @@ def inspect(patchset):
     Returns:
         None
     """
+    from pyhf.patchset import PatchSet
+
     with click.open_file(patchset, "r", encoding="utf-8") as fstream:
         patchset_spec = json.load(fstream)
 

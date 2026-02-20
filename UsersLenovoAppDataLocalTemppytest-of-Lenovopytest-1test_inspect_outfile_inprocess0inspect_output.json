@@ -1,0 +1,129 @@
+{
+    "channels": [
+        [
+            "channel1",
+            2
+        ]
+    ],
+    "measurements": [
+        [
+            "GaussExample",
+            "SigXsecOverSM",
+            [
+                "lumi",
+                "SigXsecOverSM",
+                "syst1"
+            ]
+        ],
+        [
+            "GammaExample",
+            "SigXsecOverSM",
+            [
+                "lumi",
+                "SigXsecOverSM",
+                "syst1"
+            ]
+        ],
+        [
+            "LogNormExample",
+            "SigXsecOverSM",
+            [
+                "lumi",
+                "SigXsecOverSM",
+                "syst1"
+            ]
+        ],
+        [
+            "ConstExample",
+            "SigXsecOverSM",
+            [
+                "lumi",
+                "SigXsecOverSM",
+                "syst1"
+            ]
+        ]
+    ],
+    "modifiers": {
+        "SigXsecOverSM": "normfactor",
+        "lumi": "lumi",
+        "staterror_channel1": "staterror",
+        "syst1": "normsys",
+        "syst2": "normsys",
+        "syst3": "normsys"
+    },
+    "parameters": [
+        [
+            "SigXsecOverSM",
+            "unconstrained"
+        ],
+        [
+            "lumi",
+            "constrained_by_normal"
+        ],
+        [
+            "staterror_channel1",
+            "constrained_by_normal"
+        ],
+        [
+            "syst1",
+            "constrained_by_normal"
+        ],
+        [
+            "syst2",
+            "constrained_by_normal"
+        ],
+        [
+            "syst3",
+            "constrained_by_normal"
+        ]
+    ],
+    "samples": [
+        "background1",
+        "background2",
+        "signal"
+    ],
+    "systematics": [
+        [
+            "SigXsecOverSM",
+            "unconstrained",
+            [
+                "normfactor"
+            ]
+        ],
+        [
+            "lumi",
+            "constrained_by_normal",
+            [
+                "lumi"
+            ]
+        ],
+        [
+            "staterror_channel1",
+            "constrained_by_normal",
+            [
+                "staterror"
+            ]
+        ],
+        [
+            "syst1",
+            "constrained_by_normal",
+            [
+                "normsys"
+            ]
+        ],
+        [
+            "syst2",
+            "constrained_by_normal",
+            [
+                "normsys"
+            ]
+        ],
+        [
+            "syst3",
+            "constrained_by_normal",
+            [
+                "normsys"
+            ]
+        ]
+    ]
+}
